@@ -1,0 +1,5 @@
+npm create vite@latest mi-pagina-premium -- --template react
+cd mi-pagina-premium
+npm install
+npm install tailwindcss @tailwindcss/vite
+npm install lucide-react
