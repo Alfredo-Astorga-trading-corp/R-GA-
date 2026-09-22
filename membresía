@@ -1,0 +1,16 @@
+function obtenerMembresia(saldo, niveles) {
+  return niveles
+    .filter((nivel) => saldo >= nivel.fondoMinimo)
+    .sort((a, b) => b.fondoMinimo - a.fondoMinimo)[0] ?? niveles[0]
+También sería necesario implementar:
+
+Registro e inicio de sesión.
+Cuenta o billetera del usuario.
+Registro verificable de depósitos y retiros.
+Configuración de niveles desde el backend.
+Actualización automática del nivel.
+Historial de beneficios diarios.
+Validaciones contra manipulación desde el navegador.
+Panel administrativo.
+Términos, advertencias de riesgo y cumplimiento legal.
+Es importante no presentar las ganancias como garantizadas: los rendimientos de inversión o trading pueden estar regulados y pueden implicar pérdidas. Lo recomendable es mostrar las importaciones como beneficios proyectados o variables , calculados en el servidor y respaldados por reglas claras.
