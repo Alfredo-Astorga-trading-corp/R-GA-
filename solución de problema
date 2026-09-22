@@ -1,0 +1,55 @@
+name: "CodeQL Advanced"
+
+on:
+  push:
+    branches: ["principal"]
+  pull_request:
+    branches: ["principal"]
+  schedule:
+    - cron: "44 14 * * 5"
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Cambia o agrega idiomas según tu repositorio.
+          - language: python
+            build-mode: none
+          # Ejemplos:
+          # - language: javascript-typescript
+          #   build-mode: none
+          # - language: c-cpp
+          #   build-mode: manual
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+
+      - name: Perform manual build
+        if: matrix.build-mode == 'manual'
+        shell: bash
+        run: |
+          echo "Replace this with the commands needed to build the project."
+          exit 1
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{ matrix.language }}"
